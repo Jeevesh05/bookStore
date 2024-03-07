@@ -1,0 +1,12 @@
+<h1>Book Bazar</h1>
+
+<h1>Articles</h1>
+
+<ul>
+  <% @products.each do |product| %>
+    <li>
+      <%= product.name %>
+      <%= product.price %>
+    </li>
+  <% end %>
+</ul>

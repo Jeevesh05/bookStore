@@ -22,3 +22,9 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+for landing page(it will display all the products):
+name of 
+        model : Product
+        controller: Products
+        resource: products
