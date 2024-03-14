@@ -1,0 +1,65 @@
+<h1>New Product Listing</h1>
+
+<%= form_with model: @product do |form| %>
+  <%= form.label :image %>
+  <%= form.file_field :image %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+    <% @product.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :price %><br>
+    <%= form.text_field :price %>
+    <% @product.errors.full_messages_for(:price).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+    <div>
+    <%= form.label :author %><br>
+    <%= form.text_field :author %>
+    <% @product.errors.full_messages_for(:author).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+    <div>
+    <%= form.label :category %><br>
+    <%= form.text_field :category %>
+    <% @product.errors.full_messages_for(:category).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+    <div>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+    <% @product.errors.full_messages_for(:description).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :quantity %><br>
+    <%= form.text_field :quantity %>
+    <% @product.errors.full_messages_for(:quantity).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :seller %><br>
+    <%#= form.text_field :seller %>
+    <% @product.errors.full_messages_for(:seller).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
