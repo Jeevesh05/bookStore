@@ -2,11 +2,19 @@
 
 <h1>Articles</h1>
 
+
+
 <ul>
   <% @products.each do |product| %>
     <li>
-      <%= product.name %>
-      <%= product.price %>
+      <% if product.image.attached %>
+        <%= image_tag product.image %>
+      <% end %>
+       <%= link_to(product.name, product) %>
+       <%= product.price %>
     </li>
   <% end %>
 </ul>
+
+<%= link_to "List new Product", new_product_path %>
+

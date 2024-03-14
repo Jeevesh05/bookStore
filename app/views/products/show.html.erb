@@ -1,0 +1,12 @@
+<% if @products.image.attached %>
+    <p>image exists</p>
+<% else %>
+    <p>image does not exists</p>
+<% end %>
+<%#%>= image_tag @products.image %>
+<h1><%= @products.name %></h1>
+<p><%= @products.price %></p>
+<p><%= @products.author %></p>
+<p><%= @products.category %></p>
+<p><%= @products.description %></p>
+
