@@ -10,3 +10,11 @@
 <p><%= @products.category %></p>
 <p><%= @products.description %></p>
 
+<ul>
+  <li><%= link_to "Edit", edit_product_path(@products) %></li>
+  <li><%= link_to "Destroy", product_path(@products), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></li>
+
+</ul>
