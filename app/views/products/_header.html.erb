@@ -46,6 +46,30 @@
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
+      <%if seller_signed_in?%>
+        <li class="nav-item active">
+          <%= link_to "Seller Sign Out",destroy_seller_session_path,method: :delete,
+            class:"nav-link" %>
+        </li>
+
+        <li class="nav-item active">
+          <%= link_to "Seller Edit", edit_seller_registration_path, class:"nav-link" %>
+        </li>
+
+      <%else%>
+        <li class="nav-item active">
+          <%= link_to "Seller Sign Up", new_seller_registration_path,class:"nav-link" %>
+        </li>
+      
+        <li class="nav-item active">
+          <%= link_to "Seller Sign In",  new_seller_session_path,class:"nav-link" %>
+        </li>
+      <%end%>
+
+
+
+
+
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

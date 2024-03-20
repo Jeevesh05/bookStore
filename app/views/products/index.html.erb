@@ -1,24 +1,31 @@
 <h1>Products</h1>
 
 
-<div class="card-deck">
-  <% @products.each do |product| %>
-    <div class="card">
-      <% if product.image.attached? %>
-        <%= image_tag product.image.variant(:thumb), class: "card-img-top" %>
+<div class="container">
+  <% @products.each_slice(3) do |products_row| %>
+    <div class="row">
+      <% products_row.each do |product| %>
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <% if product.image.attached? %>
+              <%= image_tag product.image.variant(:thumb), class: "card-img-top" %>
+            <% end %>
+
+            <div class="card-body">
+              <%= link_to product.name, product, class: "card-title" %>
+              <p class="card-text"><%= product.price %></p>
+            </div>
+
+            <div class="card-footer">
+              <small class="text-muted">Add To Cart</small>
+            </div>
+          </div>
+        </div>
       <% end %>
-
-      <div class="card-body">
-        <%= link_to product.name, product, class: "card-title" %>
-        <p class="card-text"><%= product.price %></p>
-      </div>
-
-      <div class="card-footer">
-        <small class="text-muted">Add To Cart</small>
-      </div>
     </div>
   <% end %>
 </div>
+
 
 
 <%= link_to "List new Product", new_product_path %>
