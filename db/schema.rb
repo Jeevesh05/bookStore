@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_20_131219) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_23_185240) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -50,19 +50,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_131219) do
   end
 
   create_table "carts", force: :cascade do |t|
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_carts_on_user_id"
+    t.integer "user_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "user_id"
     t.decimal "total_price", precision: 10, scale: 2
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.integer "user_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -98,6 +96,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_131219) do
   end
 
   create_table "sellers", force: :cascade do |t|
+    t.string "name"
     t.string "address"
     t.string "phone_number"
     t.datetime "created_at", null: false
