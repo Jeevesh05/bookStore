@@ -1,4 +1,7 @@
 class ProductsController < ApplicationController
+
+  before_action :authenticate_seller!, only: [:new, :create, :edit, :update, :destroy]
+
   def index
     @products = Product.all
   end
@@ -45,6 +48,6 @@ class ProductsController < ApplicationController
   private
     def product_params
       params.require(:product).permit(:name, :price, :author, :category,
-         :description, :quantity, :image)
+         :description, :quantity, :image, :seller_id)
     end
 end

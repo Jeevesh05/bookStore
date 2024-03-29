@@ -1,0 +1,9 @@
+<h1>About</h1>
+
+
+<p>Welcome, <%= current_user.name %></p>
+<p>Your address: <%= current_user.address %></p>
+<p>Your phone number: <%= current_user.phone_number %></p>
+
+
+<%= link_to "Edit details", edit_user_path(current_user.id) %>

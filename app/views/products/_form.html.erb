@@ -41,9 +41,9 @@
   </div>
 
     <div>
-    <%= form.label :discription %><br>
-    <%= form.text_area :discription %><br>
-    <% product.errors.full_messages_for(:discription).each do |message| %>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %><br>
+    <% product.errors.full_messages_for(:description).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
@@ -55,6 +55,13 @@
       <div><%= message %></div>
     <% end %>
   </div>
+
+  <div>
+    <%= form.label :seller_id, "Seller ID" %><br>
+    <%= form.text_field :seller_id, value: current_seller.id, readonly: true, disabled: true %>
+  </div>
+    current seller <%= current_seller.email %>
+
 
   <div>
     <%= form.submit %>

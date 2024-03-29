@@ -1,0 +1,9 @@
+<h1>About</h1>
+
+
+<p>Welcome, <%= current_seller.name %></p>
+<p>Your address: <%= current_seller.address %></p>
+<p>Your phone number: <%= current_seller.phone_number %></p>
+
+
+<%= link_to "Edit details", edit_seller_path(current_seller.id) %>

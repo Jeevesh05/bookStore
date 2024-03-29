@@ -1,0 +1,13 @@
+<h1>Edit Profile</h1>
+<%= form_for(@user) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :address %>
+  <%= f.text_field :address %>
+
+  <%= f.label :phone_number %>
+  <%= f.text_field :phone_number %>
+
+  <%= f.submit "Update Profile" %>
+<% end %>
