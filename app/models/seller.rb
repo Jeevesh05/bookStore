@@ -4,4 +4,8 @@ class Seller < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :products
+
+  validates :name, presence: true
+  validates :address, presence: true
+  validates :phone_number, presence: true
 end

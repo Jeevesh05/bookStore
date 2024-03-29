@@ -8,71 +8,57 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
 
-      <%if user_signed_in?%>
-        <li class="nav-item active">
-          <%= link_to "Sign Out",destroy_user_session_path,method: :delete,
-            class:"nav-link" %>
-        </li>
 
-        <li class="nav-item active">
-          <%= link_to "Edit Profile", edit_user_registration_path, class:"nav-link" %>
-        </li>
 
-      <%else%>
-        <li class="nav-item active">
-          <%= link_to "Sign Up", new_user_registration_path,class:"nav-link" %>
-        </li>
-      
-        <li class="nav-item active">
-          <%= link_to "Sign In",  new_user_session_path,class:"nav-link" %>
-        </li>
-      <%end%>
+<% if user_signed_in? %>
+  <li class="nav-item active">
+    <%= link_to "Edit Password", edit_user_registration_path, class: "nav-link" %>
+  </li>
+  <li class="nav-item active">
+    <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+  </li>
 
-      
+<% elsif seller_signed_in? %>
+  <li class="nav-item active">
+    <%= link_to "Edit Password", edit_seller_registration_path, class: "nav-link" %>
+  </li>
+  <li class="nav-item active">
+    <%= link_to "Sign Out", destroy_seller_session_path, method: :delete, class: "nav-link" %>
+  </li>
 
-      
-
-      <li class="nav-item">
-        <a class="nav-link" href="#">dullB</a>
-      </li>
-      <li class="nav-item dropdown">
+<% else %>
+  <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+          Sign Up
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">        
+            <%= link_to "User", new_user_registration_path, class: "dropdown-item" %>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <%= link_to "Seller", new_seller_registration_path, class: "dropdown-item" %>
         </div>
       </li>
-      <%if seller_signed_in?%>
-        <li class="nav-item active">
-          <%= link_to "Seller Sign Out",destroy_seller_session_path,method: :delete,
-            class:"nav-link" %>
-        </li>
 
-        <li class="nav-item active">
-          <%= link_to "Seller Edit", edit_seller_registration_path, class:"nav-link" %>
-        </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sign In
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">        
+            <%= link_to "User", new_user_session_path, class: "dropdown-item" %>
+        <div class="dropdown-divider"></div>
+          <%= link_to "Seller", new_seller_session_path, class: "dropdown-item" %>        </div>
+      </li>
+<% end %>
 
-      <%else%>
-        <li class="nav-item active">
-          <%= link_to "Seller Sign Up", new_seller_registration_path,class:"nav-link" %>
-        </li>
-      
-        <li class="nav-item active">
-          <%= link_to "Seller Sign In",  new_seller_session_path,class:"nav-link" %>
-        </li>
-      <%end%>
-
-
-
-
-
+      <li class="nav-item active">
+        <% if user_signed_in? %>
+          <%= link_to "About",users_path,class: "nav-link"%>
+        <% elsif seller_signed_in? %>
+          <%= link_to "About",sellers_path,class: "nav-link"%>
+        <% end %>
+      </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0" action="/search">
-      <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
