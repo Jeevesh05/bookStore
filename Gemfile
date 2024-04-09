@@ -5,7 +5,7 @@ ruby "3.2.3"
 gem 'devise', '~> 4.9', '>= 4.9.3'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
-
+gem 'ruby-vips', '~> 2.1', '>= 2.1.4'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
