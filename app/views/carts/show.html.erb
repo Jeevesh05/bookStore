@@ -1,0 +1,65 @@
+<!-- app/views/carts/show.html.erb -->
+
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  .product-image {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  .total-bill {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: green;
+  }
+</style>
+
+<h1>Your Cart</h1>
+
+<% if @cart.cart_items.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart.cart_items.each do |cart_item| %>
+        <tr>
+          <td>
+            <%= image_tag(cart_item.product.image.variant(:thumb), class: "product-image") %>
+            <br>
+            <%= cart_item.product.name %>
+            <br>
+            <%= cart_item.product.description %>
+          </td>
+          <td>
+            <%= form_with(model: cart_item, url: update_quantity_cart_path(@cart, cart_item), method: :patch) do |form| %>
+              <%= form.number_field :quantity %>
+              <%= form.submit 'Update' %>
+            <% end %>
+          </td>
+          <td>
+            <%= button_to 'Remove', destroy_item_cart_path(@cart, cart_item), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <p class="total-bill">Total Amount: <%= number_to_currency(@cart.total_amount) %></p>
+<% else %>
+  <p>Your cart is empty.</p>
+<% end %>
+
