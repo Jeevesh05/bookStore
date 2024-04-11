@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  belongs_to :seller,optional:true
+  belongs_to :seller
 
   has_one_attached :image do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100]

@@ -15,6 +15,7 @@
               <%= link_to product.name, product, class: "card-title" %>
               <p class="card-text"><%= product.price %></p>
               <p class="card-text"><%= product.description %></p>
+              <p class="card-text">sold by<%= product.seller_id %></p>
             </div>
 
             <div class="card-footer">
@@ -37,5 +38,5 @@
   </div>
 <% end %>
 
-<%= link_to "List new Product", new_product_path %>
+
 

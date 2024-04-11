@@ -34,6 +34,18 @@
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
+
+  <%= form_for(@seller) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :address %>
+  <%= f.text_field :address %>
+
+  <%= f.label :phone_number %>
+  <%= f.text_field :phone_number %>
+
+
 <% end %>
 
 <h3>Cancel my account</h3>
