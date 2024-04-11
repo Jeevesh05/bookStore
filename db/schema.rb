@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_20_131219) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_09_051404) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -40,8 +40,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_131219) do
   end
 
   create_table "cart_items", force: :cascade do |t|
-    t.integer "cart_id"
-    t.integer "product_id"
+    t.integer "cart_id", null: false
+    t.integer "product_id", null: false
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -50,9 +50,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_131219) do
   end
 
   create_table "carts", force: :cascade do |t|
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.string "status"
+    t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -60,7 +62,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_131219) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -83,6 +84,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_131219) do
     t.integer "seller_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "available_quantity"
     t.index ["seller_id"], name: "index_products_on_seller_id"
   end
 
@@ -106,7 +108,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_131219) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "name"
     t.index ["email"], name: "index_sellers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_sellers_on_reset_password_token", unique: true
   end
@@ -131,7 +132,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_131219) do
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "products"
   add_foreign_key "carts", "users"
-  add_foreign_key "orders", "users"
   add_foreign_key "payments", "orders"
   add_foreign_key "products", "sellers"
   add_foreign_key "seller_orders", "orders"

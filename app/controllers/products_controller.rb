@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
     @products = Product.all
 
   end
+
   def search
     @products = Product.where("name LIKE ?","%" + params[:q] + "%")
   end
@@ -47,6 +48,25 @@ class ProductsController < ApplicationController
     @product.destroy
 
     redirect_to root_path, status: :see_other
+  end
+
+    # app/controllers/products_controller.rb
+
+  def add_to_cart
+      @product = Product.find(params[:id])
+    quantity = params[:quantity].to_i
+    if quantity <= 0
+      flash[:error] = "Invalid quantity."
+    elsif @product.quantity < quantity
+      flash[:error] = "Not enough available quantity for this product."
+    else
+      # Decrement quantity from seller's inventory
+      @product.update(quantity: @product.quantity - quantity)
+      # Add product to user's cart
+      current_user.active_cart.add_item(@product, quantity)
+      flash[:success] = "Product added to cart successfully."
+    end
+    redirect_to products_path
   end
 
   private

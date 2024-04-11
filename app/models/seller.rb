@@ -5,7 +5,7 @@ class Seller < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :products
 
-  validates :name, presence: true
-  validates :address, presence: true
-  validates :phone_number, presence: true
+  validates :name, presence: false
+  validates :address, presence: false
+  validates :phone_number, presence: false
 end

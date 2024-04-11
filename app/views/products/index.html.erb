@@ -14,10 +14,14 @@
             <div class="card-body">
               <%= link_to product.name, product, class: "card-title" %>
               <p class="card-text"><%= product.price %></p>
+              <p class="card-text"><%= product.description %></p>
             </div>
 
             <div class="card-footer">
-              <small class="text-muted">Add To Cart</small>
+              <%= form_tag add_to_cart_product_path(product.id), method: :post do %>
+              <%= number_field_tag 'quantity', 1, min: 1, max: product.available_quantity %>
+              <%= submit_tag "Add to Cart" %>
+              <% end %>
             </div>
           </div>
         </div>
@@ -26,7 +30,12 @@
   <% end %>
 </div>
 
-
+<!-- Flash messages -->
+<% flash.each do |type, message| %>
+  <div class="flash <%= type %>">
+    <%= message %>
+  </div>
+<% end %>
 
 <%= link_to "List new Product", new_product_path %>
 
