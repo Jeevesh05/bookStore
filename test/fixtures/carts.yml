@@ -2,6 +2,11 @@
 
 one:
   user: one
+<<<<<<< HEAD
+=======
+  status: MyString
 
 two:
   user: two
+  status: MyString
+>>>>>>> origin/master
