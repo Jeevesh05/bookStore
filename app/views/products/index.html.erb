@@ -1,42 +1,34 @@
 <h1>Products</h1>
 
-
 <div class="container">
   <% @products.each_slice(3) do |products_row| %>
     <div class="row">
       <% products_row.each do |product| %>
         <div class="col-md-4 mb-3">
-          <div class="card">
+          <div class="card border-dark mb-3" style="max-width: 18rem;">
             <% if product.image.attached? %>
-              <%= image_tag product.image.variant(:thumb), class: "card-img-top" %>
+               <%= image_tag product.image.variant(resize_to_limit: [200, 200]), class: "card-img-top" %>
             <% end %>
 
             <div class="card-body">
               <%= link_to product.name, product, class: "card-title" %>
-              <p class="card-text"><%= product.price %></p>
-              <p class="card-text"><%= product.description %></p>
-              <p class="card-text">sold by<%= product.seller_id %></p>
+              <p><%= product.description %></p>
+              <p>$ <%= product.price %></p>
+              
+              <p class="card-text">sold by, <%= product.seller.name %></p>
             </div>
 
-            <div class="card-footer">
-              <%= form_tag add_to_cart_product_path(product.id), method: :post do %>
-              <%= number_field_tag 'quantity', 1, min: 1, max: product.available_quantity %>
-              <%= submit_tag "Add to Cart" %>
-              <% end %>
-            </div>
+            <% if user_signed_in? %>
+              <div class="card-footer border-dark">
+                <%= form_tag add_to_cart_product_path(product.id), method: :post do %>
+                  <%= number_field_tag 'quantity', 1, min: 1, max: product.available_quantity %>
+                  <%= button_tag "Add to Cart", class:"btn btn-primary mt-3" %>
+                <% end %>
+              </div>
+            <% end %>
           </div>
         </div>
       <% end %>
     </div>
   <% end %>
 </div>
-
-<!-- Flash messages -->
-<% flash.each do |type, message| %>
-  <div class="flash <%= type %>">
-    <%= message %>
-  </div>
-<% end %>
-
-
-

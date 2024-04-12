@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!, only: [:add_to_cart]
+  before_action :authenticate_seller!, only: [:new, :create, :edit, :update, :destroy, :my_products]
 
-  before_action :authenticate_seller!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :authenticate_seller!, only: [:my_products]
   def index
     @products = Product.all
 
@@ -16,9 +16,6 @@ class ProductsController < ApplicationController
   end
 
   def my_products
-    #@products = Product.find(current_seller.products)
-    #sellerID = current_seller.id
-    #@products = Product.find(params[:sellerID])
     @products = current_seller.products
   end
 
@@ -67,6 +64,9 @@ class ProductsController < ApplicationController
     elsif @product.quantity < quantity
       flash[:error] = "Not enough available quantity for this product."
     else
+      if current_user.active_cart.nil?
+        current_user.create_active_cart
+      end
       # Decrement quantity from seller's inventory
       @product.update(quantity: @product.quantity - quantity)
       # Add product to user's cart

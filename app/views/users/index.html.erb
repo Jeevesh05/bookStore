@@ -6,4 +6,4 @@
 <p>Your phone number: <%= current_user.phone_number %></p>
 
 
-<%= link_to "Edit details", edit_user_path(current_user.id) %>
+<%= button_to "Edit details", edit_user_path(current_user.id), method: :get, class: "btn btn-primary mt-3 ml-3" %>

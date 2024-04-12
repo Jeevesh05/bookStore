@@ -2,8 +2,9 @@
 
 
 <p>Welcome, <%= current_seller.name %></p>
+<p>Your seller id:  <%= current_seller.id %></p>
 <p>Your address: <%= current_seller.address %></p>
 <p>Your phone number: <%= current_seller.phone_number %></p>
 
 
-<%= link_to "Edit details", edit_seller_path(current_seller.id) %>
+<%= button_to "Edit details", edit_seller_path(current_seller.id), method: :get, class: "btn btn-primary mt-3 ml-3" %>
