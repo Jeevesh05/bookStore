@@ -1,22 +1,32 @@
-<% if @products.image.attached? %>
-    <%= image_tag @products.image.variant(resize_to_limit: [100, 100]) %>
-    
-<% else %>
-    <p>image does not exists</p>
-<% end %>
-<h1><%= @products.name %></h1>
-<p><%= @products.price %></p>
-<p><%= @products.author %></p>
-<p><%= @products.category %></p>
-<p><%= @products.description %></p>
 
-<%if seller_signed_in?%>
-  <ul>
-    <li><%= link_to "Edit", edit_product_path(@products) %></li>
-    <li><%= link_to "Destroy", product_path(@products), data: {
-                      turbo_method: :delete,
-                      turbo_confirm: "Are you sure?"
-                    } %></li>
+<div class="d-flex justify-content-evenly mt-5 ml-5">
+  <div class="image-section mr-5">
+    <% if @products.image.attached? %>
+      <%= image_tag @products.image.variant(resize_to_limit: [400, 400]) %>      
+    <% else %>
+      <p>image does not exist</p>
+    <% end %>
+  </div>
+  <div class="details-section">
+    <h1><%= @products.name %></h1>
+    <p><%= @products.description %></p>
+    <p>$ <%= @products.price %></p>
+    <p>Author <%= @products.author %></p>
+    <p><%= @products.category %></p>
+    <p class="card-text">sold by <%= @products.seller.name %></p>
 
-  </ul>
-<%end%>
+
+  <%if seller_signed_in? && current_seller.id == @products.seller_id %>
+  <div class="d-flex justify-content-evenly ml-3">
+    <div class="mr-3">  
+      <%= button_to "Edit", edit_product_path(@products), method: :get, class: "btn btn-primary" %></li>
+    </div>
+    <%= button_to "Delete", product_path(@products),
+     method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+  </div>
+  <%end%>
+
+  </div>
+</div>
+
+

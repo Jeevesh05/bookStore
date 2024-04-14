@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!, only: [:add_to_cart]
+  before_action :authenticate_seller!, only: [:new, :create, :edit, :update, :destroy, :my_products]
 
-  before_action :authenticate_seller!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :authenticate_seller!, only: [:my_products]
   def index
     @products = Product.all
 
@@ -16,9 +16,6 @@ class ProductsController < ApplicationController
   end
 
   def my_products
-    #@products = Product.find(current_seller.products)
-    #sellerID = current_seller.id
-    #@products = Product.find(params[:sellerID])
     @products = current_seller.products
   end
 

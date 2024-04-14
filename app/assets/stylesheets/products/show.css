@@ -1,0 +1,9 @@
+.product-details {
+    display: flex;
+    align-items: center;
+  }
+  
+  .details {
+    margin-left: 20px; /* Adjust this as needed */
+  }
+  
