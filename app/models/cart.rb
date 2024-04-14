@@ -1,7 +1,5 @@
 class Cart < ApplicationRecord
   belongs_to :user
-<<<<<<< HEAD
-=======
   has_many :cart_items, dependent: :destroy
 
   scope :active, -> { where(status: 'active') }
@@ -19,5 +17,4 @@ class Cart < ApplicationRecord
     cart_items.sum { |item| (item.product.price || BigDecimal('0')) * (item.quantity || 0) }
   end
 
->>>>>>> origin/master
 end

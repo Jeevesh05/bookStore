@@ -67,6 +67,9 @@ class ProductsController < ApplicationController
     elsif @product.quantity < quantity
       flash[:error] = "Not enough available quantity for this product."
     else
+      if current_user.active_cart.nil?
+        current_user.create_active_cart
+      end
       # Decrement quantity from seller's inventory
       @product.update(quantity: @product.quantity - quantity)
       # Add product to user's cart
