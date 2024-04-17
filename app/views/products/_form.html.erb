@@ -1,64 +1,63 @@
+<div class="container border p-4 w-50 rounded ">
 <%= form_with model: product do |form| %>
+  <div class="mb-3 form-group">
 
-    <div>
-        <%= form.label :image %><br>
-        <%= form.file_field :image %>
-        <% product.errors.full_messages_for(:image).each do |message| %>
-            <div><%= message %></div>
-        <% end %>
-    </div>
+    <%= form.file_field :image, class: "form-control",placeholder:"image" %>
+    <% product.errors.full_messages_for(:image).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
 
-  <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
+  <div class="mb-3 form-group">
+
+    <%= form.text_field :name, class: "form-control",placeholder:"Name" %>
     <% product.errors.full_messages_for(:name).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
 
-  <div>
-    <%= form.label :price %><br>
-    <%= form.text_area :price %><br>
+  <div class="form-group">
+
+    <%= form.text_field :price, class: "form-control",placeholder:"Price" %>
     <% product.errors.full_messages_for(:price).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
 
-  <div>
-    <%= form.label :author %><br>
-    <%= form.text_area :author %><br>
+  <div class="form-group">
+    
+    <%= form.text_field :author, class: "form-control",placeholder:"Author" %>
     <% product.errors.full_messages_for(:author).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
 
-  <div>
-    <%= form.label :category %><br>
-    <%= form.text_area :category %><br>
+  <div class="form-group">
+
+    <%= form.text_field :category, class: "form-control",placeholder:"Category" %>
     <% product.errors.full_messages_for(:category).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
 
-    <div>
-    <%= form.label :description %><br>
-    <%= form.text_area :description %><br>
+    <div class="form-group">
+
+    <%= form.text_area :description, class: "form-control",placeholder:"Description" %>
     <% product.errors.full_messages_for(:description).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
 
-    <div>
-    <%= form.label :quantity %><br>
-    <%= form.text_area :quantity %><br>
+    <div class="form-group">
+
+    <%= form.text_field :quantity, class: "form-control",placeholder:"Quantity" %>
     <% product.errors.full_messages_for(:quantity).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
 
-
-
-  <div>
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
+</div>

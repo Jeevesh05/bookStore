@@ -20,9 +20,10 @@
 
   <body>
     <%= render 'products/header'%>
-
+    
+      
       <% flash.each do |type, message| %>
-        <div class="alert alert-info" role="alert"<%= type %>"><%= message %></div>
+        <div class="alert alert-info alert-dismissible fade show" role="alert" role="alert"<%= type %>"><%= message %></div>
       <% end %>
 
     <div>

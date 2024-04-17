@@ -25,9 +25,9 @@
                 <%if seller_signed_in? && current_seller.id == product.seller_id %>
                   <div class="d-flex justify-content-evenly ml-3">
                     <div class="mr-3">  
-                      <%= button_to "Edit", edit_product_path(@products), method: :get, class: "btn btn-primary" %>
+                      <%= button_to "Edit", edit_product_path(product), method: :get, class: "btn btn-primary" %>
                     </div>
-                    <%= button_to "Delete", product_path(@products),
+                    <%= button_to "Delete", product_path(product),
                             method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
                   </div>
                 <%end%>

@@ -1,4 +1,4 @@
-<h1>Products</h1>
+<h2>Products</h2>
 
 <div class="container">
   <% @products.each_slice(3) do |products_row| %>
@@ -11,11 +11,16 @@
             <% end %>
 
             <div class="card-body">
-              <%= link_to product.name, product, class: "card-title" %>
-              <p><%= product.description %></p>
+              <%= link_to product.name, product, class: "card-title text-capitalize" %>
+              <p class="text-capitalize"><%= product.description %></p>
               <p>$ <%= product.price %></p>
               
-              <p class="card-text">sold by, <%= product.seller.name %></p>
+              
+              <% if product.seller %>
+                <p class="card-text">Sold by <%= product.seller.name %></p>
+              <% else %>
+                <p class="card-text">Sold by Unknown Seller</p>
+              <%end%>
             </div>
 
             <% if user_signed_in? %>
