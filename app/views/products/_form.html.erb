@@ -32,11 +32,19 @@
     <% end %>
   </div>
 
-  <div class="form-group">
+  <!-- Link to add new category -->
+  <%= link_to "Add New Category", new_category_path %>
 
-    <%= form.text_field :category, class: "form-control",placeholder:"Category" %>
-    <% product.errors.full_messages_for(:category).each do |message| %>
-      <div><%= message %></div>
+  <%= form.label :category_ids, "Select Categories" %>
+  <%= form.collection_select :category_ids, Category.all, :id, :name, { prompt: "Select categories", multiple: true } %>
+  <div>
+    <strong>Select Categories:</strong>
+    <% Category.all.each do |category| %>
+      <label>
+        <%= check_box_tag "product[category_ids][]", category.id, product.categories.include?(category) %>
+        <%= category.name %>
+      </label>
+      <br>
     <% end %>
   </div>
 

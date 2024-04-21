@@ -1,0 +1,39 @@
+<h2>Products</h2>
+
+<div class="container">
+  <% @products.each_slice(3) do |products_row| %>
+    <div class="row">
+      <% products_row.each do |product| %>
+        <div class="col-md-4 mb-3">
+          <div class="card border-dark mb-3" style="max-width: 18rem;">
+            <% if product.image.attached? %>
+               <%= image_tag product.image.variant(resize_to_limit: [200, 200]), class: "card-img-top" %>
+            <% end %>
+
+            <div class="card-body">
+              <%= link_to product.name, product, class: "card-title text-capitalize" %>
+              <p class="text-capitalize"><%= product.description %></p>
+              <p>$ <%= product.price %></p>
+              
+              
+              <% if product.seller %>
+                <p class="card-text">Sold by <%= product.seller.name %></p>
+              <% else %>
+                <p class="card-text">Sold by Unknown Seller</p>
+              <%end%>
+            </div>
+
+            <% if user_signed_in? %>
+              <div class="card-footer border-dark">
+                <%= form_tag add_to_cart_product_path(product.id), method: :post do %>
+                  <%= number_field_tag 'quantity', 1, min: 1, max: product.available_quantity %>
+                  <%= button_tag "Add to Cart", class:"btn btn-primary mt-3" %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -12,8 +12,12 @@
       <p class="lead text-capitalize"><%= @products.description %></p>
       <div class="lead">
     <p>$ <%= @products.price %></p>
-    <p>Author <p class="text-capitalize"><%= @products.author %></p></p>
-    <p class="text-capitalize"><%= @products.category %></p>
+    <p>Written by <%= @products.author %></p>
+    <p class="text-capitalize">Categories : 
+      <% @products.categories.each do |category| %>
+      <%= category.name %>
+      <% end %> 
+      </p>
     <p class="card-text text-capitalize"">Sold by <%= @products.seller.name %></p>
     </div>
 

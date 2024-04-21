@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 ruby "3.2.3"
+gem 'jquery-rails'
 
 gem 'devise', '~> 4.9', '>= 4.9.3'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"

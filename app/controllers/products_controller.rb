@@ -27,6 +27,9 @@ class ProductsController < ApplicationController
     @product = current_seller.products.build(product_params)
 
     if @product.save
+      if params[:product][:category].present?
+        @product.categories << Category.find_or_create_by(name: params[:product][:category])
+      end
       redirect_to @product, notice: 'Product was successfully created.'
     else
       render :new, status: :unprocessable_entity
@@ -78,7 +81,7 @@ class ProductsController < ApplicationController
 
   private
     def product_params
-      params.require(:product).permit(:name, :price, :author, :category,
-         :description, :quantity, :image)
+      params.require(:product).permit(:name, :price, :author,
+         :description, :quantity, :image, :category, category_ids: [])
     end
 end
