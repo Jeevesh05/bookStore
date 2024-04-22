@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_20_120034) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_18_044608) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -43,6 +43,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_20_120034) do
     t.integer "cart_id", null: false
     t.integer "product_id", null: false
     t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["cart_id"], name: "index_cart_items_on_cart_id"
     t.index ["product_id"], name: "index_cart_items_on_product_id"
   end
@@ -60,10 +62,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_20_120034) do
     t.integer "product_id", null: false
     t.integer "quantity"
     t.decimal "price", precision: 10, scale: 2
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_order_items_on_order_id"
-    t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -82,6 +86,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_20_120034) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_payments_on_order_id"
+  end
+
+  create_table "product_categories", force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_product_categories_on_category_id"
+    t.index ["product_id"], name: "index_product_categories_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -137,6 +150,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_20_120034) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "products"
@@ -145,6 +159,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_20_120034) do
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "payments", "orders"
+  add_foreign_key "product_categories", "categories"
+  add_foreign_key "product_categories", "products"
   add_foreign_key "products", "sellers"
   add_foreign_key "seller_orders", "orders"
   add_foreign_key "seller_orders", "sellers"

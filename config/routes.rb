@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get "search", to: "products#search"
   get '/cart', to: 'carts#show', as: 'cart'
 
+  resources :categories, only: [:new, :create]
+
   resources :products do
     post 'add_to_cart', on: :member
   end
