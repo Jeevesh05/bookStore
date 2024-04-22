@@ -17,4 +17,7 @@ class Cart < ApplicationRecord
     cart_items.sum { |item| (item.product.price || BigDecimal('0')) * (item.quantity || 0) }
   end
 
+  def clear
+    cart_items.destroy_all
+  end
 end

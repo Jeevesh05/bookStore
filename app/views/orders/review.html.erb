@@ -1,0 +1,53 @@
+<h1 align="center">Order Detail</h1>
+<div>
+  <div class="authentication_method">
+    <% if @cart.cart_items.any?%>     <!-- Display cart items -->
+      <h2>Cart Items</h2>
+      <table>
+        <thead>
+           <tr>
+             <th>Product</th>
+             <th>Quantity</th>
+             <th>Price</th>
+             </tr>
+        </thead>
+        <tbody>
+          <% @cart.cart_items.each do |cart_item| %>
+            <tr>
+              <td><%= cart_item.product.name %></td>
+              <td><%= cart_item.quantity %></td>
+              <td><%= cart_item.product.price %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+        <p>No items in the cart.</p>
+    <% end %>
+  </div>
+
+  <div class="authentication_method">           <!-- Display address and phone number and name of the user-->
+    <h2>Address</h2>
+    <p><%= current_user.name %></p>
+    <p><%= current_user.phone_number %></p>
+    <p><%= current_user.address %></p>
+  </div>
+</div>
+
+<div class="authentication_method">
+<p>Order Date: <%= @order_review_date.strftime("%Y-%m-%d") %></p> 
+<p><%= @order_review_date.strftime("%A") %></p>
+<p>Estimate Delivery: <%= @estimate_delivery_date.strftime("%Y-%m-%d") %>
+<p><%= @estimate_delivery_date.strftime("%A") %></p>
+</div>
+
+<div class="authentication_method">
+  <h2>Bill</h2>
+  <p class="total-bill">Total Amount : <%= number_to_currency(@cart.total_amount) %></p>
+  <p class="total-bill"> Tax         : <%= number_to_currency(@tax)%></p>
+  <p class="total-bill"> Discount    : <%= number_to_currency(@discount)%></p>
+  <p class="total-bill">  To Pay.    : <%= number_to_currency(@total_bill)%></p>
+</div>
+
+<%= link_to "Confirm Order", checkout_path, class: "btn btn-primary" %>
+

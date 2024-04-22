@@ -9,4 +9,5 @@ class User < ApplicationRecord
   validates :phone_number, presence: false
   has_one :active_cart, -> { active }, class_name: 'Cart'
   has_many :saved_carts, -> { where.not(status: 'active') }, class_name: 'Cart'
+  has_many :orders
 end

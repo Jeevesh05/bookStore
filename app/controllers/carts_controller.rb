@@ -53,6 +53,16 @@ class CartsController < ApplicationController
         redirect_to cart_path, notice: 'Item removed from cart.'
     end
 
+    def clear
+      @cart = current_user.active_cart
+      if @cart
+        @cart.cart_items.destroy_all
+        redirect_to cart_path, notice: "Cart cleared successfully!"
+      else
+        redirect_to root_path, alert: "No active cart found."
+      end
+    end
+
     def update_quantity
       @cart_item = CartItem.find(params[:cart_item_id])
       quantity = params[:cart_item][:quantity].to_i
@@ -72,7 +82,7 @@ class CartsController < ApplicationController
       end
     
       redirect_to cart_path
-    end    
+    end
 
     private
       # Use callbacks to share common setup or constraints between actions.

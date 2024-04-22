@@ -61,7 +61,10 @@
         <% if user_signed_in? %>
           <% unless current_page?(cart_path) %>
             <%= link_to "Your Cart", cart_path, class: "nav-link" %>
-          <% end %>  
+          <% end %> 
+          <% unless current_page?(cart_path) %>
+            <%= link_to "Orders", orders_path, class: "nav-link" %> 
+           <% end %>
         <% end %>
         </li>
       <li>

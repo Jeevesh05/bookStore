@@ -14,5 +14,10 @@ Rails.application.routes.draw do
   resources :carts do
      delete 'destroy_item/:cart_item_id', action: :destroy_item, on: :member, as: 'destroy_item'
      patch 'update_quantity/:cart_item_id', action: :update_quantity, on: :member, as: 'update_quantity'
+     delete 'clear', action: :clear, on: :member, as: 'clear'
   end
+
+  resources :orders 
+  get 'reviews', to: 'orders#review'
+  get 'checkout', to: 'orders#checkout'
 end
