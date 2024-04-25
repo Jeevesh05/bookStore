@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
 
   def show
     @products = Product.find(params[:id])
+    @related_products = Product.all
   end
 
   def my_products
@@ -81,7 +82,7 @@ class ProductsController < ApplicationController
 
   private
     def product_params
-      params.require(:product).permit(:name, :price, :author,
-         :description, :quantity, :image, :category, category_ids: [])
+      params.require(:product).permit(:name, :price, :author, :description,
+       :summary, :quantity, :image, :category, category_ids: [])
     end
 end
