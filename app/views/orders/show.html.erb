@@ -1,0 +1,31 @@
+<!-- app/views/orders/show.html.erb -->
+<h1>Order Details</h1>
+
+<p>User Name: <%= current_user.name %></p>
+<p>Address: <%= current_user.address %></p>
+<!-- <p>Order Date: < @order.order_date.strftime("%Y-%m-%d %H:%M:%S") > </p>
+<p>Status: < @order.status.capitalize %></p> -->
+
+<h2>Order Items</h2>
+<div class="authentication_method">
+  <h2>Ordered Items</h2>
+      <table>
+        <thead>
+           <tr>
+             <th>Product</th>
+             <th>Quantity</th>
+             <th>Price</th>
+             </tr>
+        </thead>
+        <tbody>
+          <% @order.order_items.each do |order_item| %>
+            <tr>
+              <td><%= order_item.product.name %></td>
+              <td><%= order_item.quantity %></td>
+              <td><%= order_item.product.price %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+</div>
+
