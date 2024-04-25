@@ -55,14 +55,12 @@
             </form>
         </div>
         <div class="col-lg-3 col-6 text-right">
-            <a href="" class="btn border">
-                <i class="fas fa-heart text-primary"></i>
-                <span class="badge">0</span>
-            </a>
-            <a href="" class="btn border">
-                <i class="fas fa-shopping-cart text-primary"></i>
-                <span class="badge">0</span>
-            </a>
+            
+                    <a href="<%= cart_path %>" class="btn border nav-link">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+                        <span class="badge">0</span>
+                    </a>
+
         </div>
     </div>
 </div>
@@ -83,21 +81,59 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="shop.html" class="nav-item nav-link">Shop</a>
-                        <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                <a href="checkout.html" class="dropdown-item">Checkout</a>
-                            </div>
-                        </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="" class="nav-item nav-link">Login</a>
-                        <a href="" class="nav-item nav-link">Register</a>
+    
+                        <% if user_signed_in? %>
+                            <div class="nav-item active">
+                                <%= link_to "Profile", users_path, class: "nav-link"%>
+                            </div>
+                            <div class="nav-item active">
+                                <%= link_to "Edit Password", edit_user_registration_path, class: "nav-link" %>
+                            </div>
+                            <div class="nav-item active">
+                                <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+                            </div>
+                        <% elsif seller_signed_in? %>
+                            <div class="nav-item active">
+                                <%= link_to "My Products", my_products_path, class: "nav-link" %>
+                            </div>
+                            <div class="nav-item active">
+                                <%= link_to "Profile", sellers_path, class: "nav-link"%>
+                            </div>
+                            <div class="nav-item active">
+                                <%= link_to "Edit Password", edit_seller_registration_path, class: "nav-link" %>
+                            </div>
+                            <div class="nav-item active">
+                                <%= link_to "Sign Out", destroy_seller_session_path, method: :delete, class: "nav-link" %>
+                            </div>
+                        <% else %>
+                            <div class="nav-item active dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Log In
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">        
+                                    <%= link_to "User", new_user_session_path, class: "dropdown-item" %>
+                                    <div class="dropdown-divider"></div>
+                                    <%= link_to "Seller", new_seller_session_path, class: "dropdown-item" %>
+                                </div>
+                            </div>
+                            <div class="nav-item active dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Register
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">        
+                                    <%= link_to "User", new_user_registration_path, class: "dropdown-item" %>
+                                    <div class="dropdown-divider"></div>
+                                    <%= link_to "Seller", new_seller_registration_path, class: "dropdown-item" %>
+                                </div>
+                            </div>
+
+                        <% end %>
                     </div>
+
+
                 </div>
             </nav>
         </div>
