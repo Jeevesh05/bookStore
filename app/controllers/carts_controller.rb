@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
     before_action :authenticate_user!
+    before_action :set_cart
 
     # GET /carts
     def index
@@ -8,12 +9,16 @@ class CartsController < ApplicationController
   
     # GET /carts/1
     def show
-        @cart = current_user.active_cart
+      @cart = current_user.active_cart
+      if @cart.nil?
+        redirect_to root_path, alert: "No active cart found."
+      end
     end
   
     # GET /carts/new
     def new
-      @cart = Cart.new
+      @cart = current_user.create_active_cart unless current_user.active_cart
+      redirect_to @cart
     end
   
     # POST /carts
@@ -86,9 +91,10 @@ class CartsController < ApplicationController
 
     private
       # Use callbacks to share common setup or constraints between actions.
-      def set_cart
-        @cart = Cart.find(params[:id])
-      end
+    def set_cart
+      @cart = params[:id] ? Cart.find_by(id: params[:id]) : current_user.active_cart
+      redirect_to root_path, alert: "No active cart found." unless @cart
+    end
   
       # Only allow a trusted parameter "white list" through.
       def cart_params

@@ -1,0 +1,35 @@
+<div class="container p-3 mt-5 mb-2 border-black shadow-lg bg-body-tertiary rounded">
+
+  <div class="row">
+    <% if @products.image.attached? %>
+      <%= image_tag @products.image.variant(resize_to_limit: [400, 400]) %>      
+    <% else %>
+      <p>image does not exist</p>
+    <% end %>
+    <div class="col ml-5">
+
+      <h1 class="display-4 text-capitalize"><%= @products.name %></h1>
+      <p class="lead text-capitalize"><%= @products.description %></p>
+      <div class="lead">
+    <p>$ <%= @products.price %></p>
+    <p>Written by <%= @products.author %></p>
+    <p class="text-capitalize">Categories : 
+      <% @products.categories.each do |category| %>
+      <%= category.name %>
+      <% end %> 
+      </p>
+    <p class="card-text text-capitalize"">Sold by <%= @products.seller.name %></p>
+    </div>
+
+  <%if seller_signed_in? && current_seller.id == @products.seller_id %>
+  <div class="d-flex justify-content-evenly ml-3 mt-3">
+    <div class="mr-3">  
+      <%= button_to "Edit", edit_product_path(@products), method: :get, class: "btn btn-primary" %></li>
+    </div>
+    <%= button_to "Delete", product_path(@products),
+     method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+  </div>
+  <%end%>
+    </div>
+  </div>
+</div>

@@ -13,4 +13,5 @@ class Product < ApplicationRecord
   validates :author, presence: true
   validates :description, presence: true
   validates :quantity, presence: true
+  validates :summary, presence: true
 end

@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
 
   def show
     @products = Product.find(params[:id])
+    @related_products = Product.all
   end
 
   def my_products
@@ -61,27 +62,33 @@ class ProductsController < ApplicationController
 
   def add_to_cart
       @product = Product.find(params[:id])
-    quantity = params[:quantity].to_i
-    if quantity <= 0
-      flash[:error] = "Invalid quantity."
-    elsif @product.quantity < quantity
-      flash[:error] = "Not enough available quantity for this product."
-    else
-      if current_user.active_cart.nil?
-        current_user.create_active_cart
+      quantity = params[:quantity].to_i
+    
+      if quantity <= 0
+        flash[:error] = "Invalid quantity."
+      elsif @product.quantity < quantity
+        flash[:error] = "Not enough available quantity for this product."
+      else
+        if current_user.active_cart.nil?
+          current_user.create_active_cart
+        end
+    
+        # Decrement quantity from seller's inventory
+        @product.update(quantity: @product.quantity - quantity)
+    
+        # Add product to user's cart
+        current_user.active_cart.add_item(@product, quantity)
+        
+        flash[:success] = "Product added to cart successfully."
       end
-      # Decrement quantity from seller's inventory
-      @product.update(quantity: @product.quantity - quantity)
-      # Add product to user's cart
-      current_user.active_cart.add_item(@product, quantity)
-      flash[:success] = "Product added to cart successfully."
-    end
-    redirect_to products_path
+    
+      redirect_to product_path
   end
+    
 
   private
     def product_params
-      params.require(:product).permit(:name, :price, :author,
-         :description, :quantity, :image, :category, category_ids: [])
+      params.require(:product).permit(:name, :price, :author, :description,
+       :summary, :quantity, :image, :category, category_ids: [])
     end
 end
