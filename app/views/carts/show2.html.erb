@@ -1,0 +1,227 @@
+<!-- app/views/carts/show.html.erb -->
+<!--
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  .product-image {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  .total-bill {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: green;
+  }
+</style>
+
+<h1>Your Cart</h1>
+
+<% if @cart.cart_items.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart.cart_items.each do |cart_item| %>
+        <tr>
+          <td>
+            <%= image_tag(cart_item.product.image.variant(:thumb), class: "product-image") %>
+            <br>
+            <%= cart_item.product.name %>
+            <br>
+            <%= cart_item.product.description %>
+          </td>
+          <td>
+            <%= form_with(model: cart_item, url: update_quantity_cart_path(@cart, cart_item), method: :patch) do |form| %>
+              <%= form.number_field :quantity %>
+              <%= form.submit 'Update' %>
+            <% end %>
+          </td>
+          <td>
+            <%= button_to 'Remove', destroy_item_cart_path(@cart, cart_item), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <p class="total-bill">Total Amount: <%= number_to_currency(@cart.total_amount) %></p>
+<% else %>
+  <p>Your cart is empty.</p>
+<% end %>
+<%= button_to "Clear Cart", clear_cart_path(@cart), method: :delete, data: { confirm: "Are you sure you want to clear your cart?" }, class: "btn btn-primary" %>
+<%= link_to "Proceed to Review", reviews_path, class: "btn btn-primary" %>
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>EShopper - Bootstrap Shop Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <!-- Your existing topbar content goes here -->
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid">
+        <!-- Your existing navbar content goes here -->
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Your Cart</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Shopping Cart</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Cart Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-8 table-responsive mb-5">
+                <table class="table table-bordered text-center mb-0">
+                    <thead class="bg-secondary text-dark">
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        <% if @cart.cart_items.any? %>
+                            <% @cart.cart_items.each do |cart_item| %>
+                                <tr>
+                                    <td>
+                                        <%= image_tag(cart_item.product.image.variant(:thumb), class: "product-image") %>
+                                        <br>
+                                        <%= cart_item.product.name %>
+                                        <br>
+                                        <%= cart_item.product.description %>
+                                    </td>
+                                    <td>
+                                        <%= form_with(model: cart_item, url: update_quantity_cart_path(@cart, cart_item), method: :patch) do |form| %>
+                                            <%= form.number_field :quantity %>
+                                            <%= form.submit 'Update' %>
+                                        <% end %>
+                                    </td>
+                                    <td>
+                                        <%= button_to 'Remove', destroy_item_cart_path(@cart, cart_item), method: :delete, data: { confirm: 'Are you sure?' } %>
+                                    </td>
+                                </tr>
+                            <% end %>
+                        <% else %>
+                            <tr>
+                                <td colspan="3">Your cart is empty.</td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+                <% if @cart.cart_items.any? %>
+                    <p class="total-bill">Total Amount: <%= number_to_currency(@cart.total_amount) %></p>
+                <% end %>
+            </div>
+            <div class="col-lg-4">
+                <!-- Order Summary -->
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                    </div>
+                    <div class="card-body">
+                        <% if @cart.cart_items.any? %>
+                            <div class="d-flex justify-content-between mb-3 pt-1">
+                                <h6 class="font-weight-medium">Subtotal</h6>
+                                <h6 class="font-weight-medium"><%= number_to_currency(@cart.total_amount) %></h6>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h6 class="font-weight-medium">Shipping</h6>
+                                
+                            </div>
+                        <% end %>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <% if @cart.cart_items.any? %>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5 class="font-weight-bold">Total</h5>
+                                <h5 class="font-weight-bold"><%= number_to_currency(@cart.total_amount) %></h5>
+                            </div>
+                            <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+                        <% else %>
+                            <p class="m-0">Your cart is empty.</p>
+                        <% end %>
+                    </div>
+                </div>
+                <!-- End Order Summary -->
+            </div>
+        </div>
+    </div>
+    <!-- Cart End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+        <!-- Your existing footer content goes here -->
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Your custom JavaScript file -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
+
+
