@@ -15,24 +15,7 @@
 
     <!-- Checkout Start -->
     <div class="container-fluid pt-5">
-        <div class="row px-xl-5">
-            <div class="col-lg-8">
-                <div class="mb-4">
-                    <h4 class="font-weight-semi-bold mb-4">Billing/Shipping Address</h4>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label><%= current_user.name %></label>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label><%= current_user.address %></label>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label><%= current_user.phone_number %></label>
-                        </div>
-                    </div>
-                </div>
-            <!--<div class="col-lg-4">-->
-                <div class="card border-secondary mb-5">
+       <div class="card border-secondary mb-5">
                     <div class="card-header bg-secondary border-0">
                         <h4 class="font-weight-semi-bold m-0">Order Total</h4>
                     </div>
@@ -45,14 +28,6 @@
                             <p><%= cart_item.product.price %></p>
                         </div>
                         <%end%>
-                        <div class="d-flex justify-content-between">
-                            <p>Colorful Stylish Shirt 2</p>
-                            <p>$150</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p>Colorful Stylish Shirt 3</p>
-                            <p>$150</p>
-                        </div>
                         <hr class="mt-0">
                         <div class="d-flex justify-content-between mb-3 pt-1">
                             <h6 class="font-weight-medium">Subtotal</h6>
@@ -75,6 +50,45 @@
                         <div class="d-flex justify-content-between mt-2">
                             <h5 class="font-weight-bold">Total</h5>
                             <h5 class="font-weight-bold"><%= number_to_currency(@total_bill)%></h5>
+                        </div>
+                    </div>
+                </div>
+    
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div class="mb-4" id="shipping-address">
+                    <h4 class="font-weight-semi-bold mb-4">Shipping Address</h4>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label><%= current_user.name %></label>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label><%= current_user.address %></label>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label><%= current_user.phone_number %></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                 <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Delivery Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3 pt-1">
+                            <h6 class="font-weight-medium">Order Date</h6>
+                            <h6 class="font-weight-medium">  <%= @order_review_date.strftime("%Y-%m-%d") %></h6>
+                            <h6 class="font-weight-medium"><%= @order_review_date.strftime("%A") %></h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Delivery Date</h6>
+                            <h6 class="font-weight-medium"><%= @estimate_delivery_date.strftime("%Y-%m-%d") %></h6>
+                            <h6 class="font-weight-medium"><%= @estimate_delivery_date.strftime("%A") %></h6>
+                        </div>
+                        <div class="card-footer border-secondary bg-transparent">
+                        <h6> estimate order time will be 3 days!!</h6>
                         </div>
                     </div>
                 </div>
@@ -105,45 +119,9 @@
                     <div class="card-footer border-secondary bg-transparent">
                         <%= link_to "Place Order", checkout_path, class: "btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3" %>
                     </div>
-                <!--</div>-->
+                </div>
+              </div>
             </div>
         </div>
-    </div>
     <!-- Checkout End -->
-
-<h1 align="center">Order Detail</h1>
-<div>
-  <div class="authentication_method">
-    <% if @cart.cart_items.any?%>     <!-- Display cart items -->
-      <h2>Cart Items</h2>
-      <table>
-        <thead>
-           <tr>
-             <th>Product</th>
-             <th>Quantity</th>
-             <th>Price</th>
-             </tr>
-        </thead>
-        <tbody>
-          <% @cart.cart_items.each do |cart_item| %>
-            <tr>
-              <td><%= cart_item.product.name %></td>
-              <td><%= cart_item.quantity %></td>
-              <td><%= cart_item.product.price %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-        <p>No items in the cart.</p>
-    <% end %>
-  </div>
-
-<div class="authentication_method">
-<p>Order Date: <%= @order_review_date.strftime("%Y-%m-%d") %></p> 
-<p><%= @order_review_date.strftime("%A") %></p>
-<p>Estimate Delivery: <%= @estimate_delivery_date.strftime("%Y-%m-%d") %>
-<p><%= @estimate_delivery_date.strftime("%A") %></p>
-</div>
-
 

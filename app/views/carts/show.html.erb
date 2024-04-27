@@ -132,7 +132,7 @@
                                 <h5 class="font-weight-bold">Total</h5>
                                 <h5 class="font-weight-bold"><%= number_to_currency(@cart.total_amount + 5) %></h5> <!-- Total amount including shipping -->
                             </div>
-                            <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+                            <%= link_to "Proceed To checkout", reviews_path, class: "btn btn-block btn-primary my-3 py-3" %>
                         <% else %>
                             <p class="m-0">Your cart is empty.</p>
                         <% end %>
