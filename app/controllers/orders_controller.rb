@@ -25,6 +25,14 @@ class OrdersController < ApplicationController
   def show
     @order = current_user.orders.find(params[:id])
     # @order.update_status  # Call method to update order status
+     @ordered_item_price = @order.order_items.sum(:price)
+     @tax = ((@ordered_item_price) *18)/100
+     @discount= ((@ordered_item_price)*10)/100
+     @total_bill= @ordered_item_price + @tax - @discount
+     @order_review_date = @order.created_at
+     @estimate_delivery_date = @order_review_date + 3.days
+
+     @order.update_status
   end
 
 
@@ -34,9 +42,22 @@ class OrdersController < ApplicationController
       @order_review_date = Date.today
       @estimate_delivery_date = Date.today + 3
       @tax = ((@cart.total_amount) *18)/100
-      @discount= ((@cart.total_amount)*5)/100
+      @discount= ((@cart.total_amount)*10)/100
       @total_bill= @cart.total_amount + @tax - @discount
     end
+
+  def calculate_ordered_item_price
+    # Fetch all order items from your database
+    order_items = OrderItem.all
+
+    # Initialize the variable to store the sum
+    ordered_item_price = 0
+
+    # Iterate over each order item and accumulate the prices
+    order_items.each do |order_item|
+      ordered_item_price += order_item.price
+    end
+  end
 
    def checkout
     user = current_user

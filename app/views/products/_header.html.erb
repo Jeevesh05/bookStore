@@ -37,7 +37,7 @@
                 <%= link_to root_path, class: "navbar-brand" do %>
                     <h1 class="m-0 display-5 font-weight-semi-bold">
                         <span class="text-primary font-weight-bold border px-3 mr-1">E</span>
-                        Book Bazar
+                        Library
                     </h1>
                 <% end %>
             </a>
@@ -73,7 +73,7 @@
         <div class="col-lg-9">
             <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
                 <a href="" class="text-decoration-none d-block d-lg-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Library</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -95,6 +95,9 @@
                             </div>
                             <div class="nav-item active">
                                 <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+                            </div>
+                            <div class="nav-item active">
+                                <%= link_to "Orders", orders_path, class: "nav-link" %>
                             </div>
                         <% elsif seller_signed_in? %>
                             <div class="nav-item active">

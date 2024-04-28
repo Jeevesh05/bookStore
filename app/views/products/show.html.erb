@@ -65,20 +65,10 @@
                 <%= button_tag "Add to Cart", type: "submit", class: "btn btn-primary mt-3", data: { disable_with: "Adding..." } %>
             <% end %>                
                 <div class="d-flex align-items-center mb-4 pt-2">
-                    <div class="input-group quantity mr-3" style="width: 130px;">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-minus" >
-                            <i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                        <input type="text" class="form-control bg-secondary text-center" value="1">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-plus">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                    <%= form_tag add_to_cart_product_path(@products.id), method: :post, id: "add-to-cart-form" do %>
+                        <%= number_field_tag 'quantity', 1, min: 1, max: @products.available_quantity, class: "form-control bg-secondary text-center", id: "quantity-field" %>
+                        <%= button_tag "Add to Cart", type: "submit", class: "btn btn-primary mt-3", data: { disable_with: "Adding..." } %>
+                    <% end %>
                 </div>
 
                 <%if seller_signed_in? && current_seller.id == @products.seller_id %>
@@ -253,7 +243,6 @@
 
     <!-- Products End -->
 
-
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
@@ -271,5 +260,32 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
+<script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
+                            event.preventDefault(); // Prevent default form submission
+      
+                            // Get form data
+                            var formData = new FormData(this);
 
+                            // Send AJAX request
+                            fetch(this.action, {
+                                method: this.method,
+                                body: formData
+                            })
+                            .then(response => {
+                                if (response.ok) {
+                                    // Handle successful form submission
+                                    console.log('Form submitted successfully');
+                                } else {
+                                    // Handle form submission error
+                                        console.error('Form submission failed');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error occurred:', error);
+                            });
+                        });
+                    });
+</script>
 </html>
