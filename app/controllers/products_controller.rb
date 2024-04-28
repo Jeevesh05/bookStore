@@ -77,7 +77,7 @@ class ProductsController < ApplicationController
       current_user.active_cart.add_item(@product, quantity)
       flash[:success] = "Product added to cart successfully."
     end
-    redirect_to products_path
+    redirect_to product_path
   end
 
   private
