@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_cart
+    before_action :set_cart_count, only: [:index, :show, :new, :create, :update_quantity, :destroy_item, :clear]
 
     # GET /carts
     def index
@@ -87,6 +88,10 @@ class CartsController < ApplicationController
       end
     
       redirect_to cart_path
+    end
+
+    def set_cart_count
+      @cart_count = current_user.active_cart.cart_items.count if current_user.active_cart
     end
 
     private

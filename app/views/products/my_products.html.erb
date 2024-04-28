@@ -1,41 +1,44 @@
 <!-- app/views/products/index.html.erb -->
-<div class="d-flex justify-content-center fixed">
-    <%= button_to "Add new Product", new_product_path, method: :get, class: "btn btn-primary mt-3 ml-3" %>
-</div>
-<h3>Your Products </h3>
 
-<div class="container">
-  <% @products.each_slice(3) do |products_row| %>
-    <div class="row">
-      <% products_row.each do |product| %>
-        <div class="col-md-4 mb-3">
-          <div class="card">
-            <%#if current_seller.id == product.seller_id %>  
-              <% if product.image.attached? %>
-                <%= image_tag product.image.variant(:thumb), class: "card-img-top" %>
-              <% end %>
 
-              <div class="card-body">
-                <%= link_to product.name, product, class: "card-title" %>
-                <p class="card-text"><%= product.price %></p>
-                <p class="card-text">sold by <%= product.seller_id %></p>
-              </div>
 
-              <div class="card-footer">
-                <%if seller_signed_in? && current_seller.id == product.seller_id %>
-                  <div class="d-flex justify-content-evenly ml-3">
-                    <div class="mr-3">  
-                      <%= button_to "Edit", edit_product_path(product), method: :get, class: "btn btn-primary" %>
-                    </div>
-                    <%= button_to "Delete", product_path(product),
-                            method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
-                  </div>
-                <%end%>
-              </div>
-            </div>
-          <%#end%>  
-        </div>
-      <% end %>
+<div class="container-fluid pt-0">
+    <div class="text-center mb-2">
+        <h2 class="section-title px-5"><span class="px-2">Your Books</span></h2>
     </div>
-  <% end %>
+    <div class="d-flex justify-content-center fixed">
+      <%= button_to "Add new Product", new_product_path, method: :get, class: "btn btn-primary mb-4" %>
+    </div>
+    <div class="row px-xl-5 pb-3">
+        <% @products.each_slice(3) do |products_row| %>
+            <% products_row.each do |product| %>
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="card product-item border-0 mb-4">
+                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <% if product.image.attached? %>
+                            <%= image_tag product.image.variant(resize_to_limit: [200, 200]), class: "card-img-top" %>
+                            <% end %>
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3"><%= link_to product.name, product, class: "card-title text-capitalize" %></h6>
+                            <div class="d-flex justify-content-center">
+                                <h6><p>$ <%= product.price %></p></h6>
+                                <h6 class="text-muted ml-2"><del>$<%= ((product.price)/(0.9)).round(2) %></del></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-evenly bg-light border">
+                            <div class="d-flex justify-content-evenly ml-3">
+                              <div class="mr-3">  
+                                <%= button_to "Edit", edit_product_path(product), method: :get, class: "btn btn-primary" %>
+                              </div>
+                              <%= button_to "Delete", product_path(product),
+                                method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                              </div>
+                            </div>
+                        
+                      </div>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
 </div>

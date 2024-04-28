@@ -63,7 +63,7 @@ class ProductsController < ApplicationController
   def add_to_cart
       @product = Product.find(params[:id])
       quantity = params[:quantity].to_i
-    
+
       if quantity <= 0
         flash[:error] = "Invalid quantity."
       elsif @product.quantity < quantity
@@ -72,18 +72,22 @@ class ProductsController < ApplicationController
         if current_user.active_cart.nil?
           current_user.create_active_cart
         end
-    
+
         # Decrement quantity from seller's inventory
         @product.update(quantity: @product.quantity - quantity)
-    
+
         # Add product to user's cart
         current_user.active_cart.add_item(@product, quantity)
-        
+
         flash[:success] = "Product added to cart successfully."
       end
-    
+
       redirect_to product_path
   end
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 
   private
     def product_params
