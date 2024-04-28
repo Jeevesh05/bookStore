@@ -58,7 +58,7 @@
             
                     <a href="<%= cart_path %>" class="btn border nav-link">
                         <i class="fas fa-shopping-cart text-primary"></i>
-                        <span class="badge">0</span>
+                        <span class="badge"><%= @cart_count || 0 %></span>
                     </a>
 
         </div>
@@ -81,7 +81,7 @@
                 <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav">
                         <a href="<%= root_path %>" class="nav-item nav-link active">Home</a>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <%= link_to "Contact", contact_path, class: "nav-item nav-link"%>
                     </div>
                     
                     <div class="navbar-nav">

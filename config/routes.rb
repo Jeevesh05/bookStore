@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'my_products', to: 'products#my_products'
   get "search", to: "products#search"
   get '/cart', to: 'carts#show', as: 'cart'
-
+  get 'contact', to: 'products#contact', as: 'contact'
   resources :categories, only: [:new, :create]
 
   resources :products do

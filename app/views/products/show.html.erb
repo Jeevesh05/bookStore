@@ -59,11 +59,7 @@
                             <%= category.name %>
                         <% end %>
                     </div>
-                </div>
-            <%= form_tag add_to_cart_product_path(@products.id), method: :post, id: "add-to-cart-form" do %>
-                <%= number_field_tag 'quantity', 1, min: 1, max: @products.available_quantity, class: "form-control bg-secondary text-center", id: "quantity-field" %>
-                <%= button_tag "Add to Cart", type: "submit", class: "btn btn-primary mt-3", data: { disable_with: "Adding..." } %>
-            <% end %>                
+                </div>           
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <%= form_tag add_to_cart_product_path(@products.id), method: :post, id: "add-to-cart-form" do %>
                         <%= number_field_tag 'quantity', 1, min: 1, max: @products.available_quantity, class: "form-control bg-secondary text-center", id: "quantity-field" %>
