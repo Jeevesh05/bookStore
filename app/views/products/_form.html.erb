@@ -8,7 +8,7 @@
     <% end %>
   </div>
 
-  <div class="mb-3 form-group">
+  <div class="field form-group">
 
     <%= form.text_field :name, class: "form-control",placeholder:"Name" %>
     <% product.errors.full_messages_for(:name).each do |message| %>
@@ -16,7 +16,7 @@
     <% end %>
   </div>
 
-  <div class="form-group">
+  <div class=" field form-group">
 
     <%= form.text_field :price, class: "form-control",placeholder:"Price" %>
     <% product.errors.full_messages_for(:price).each do |message| %>
@@ -24,7 +24,7 @@
     <% end %>
   </div>
 
-  <div class="form-group">
+  <div class=" field form-group">
     
     <%= form.text_field :author, class: "form-control",placeholder:"Author" %>
     <% product.errors.full_messages_for(:author).each do |message| %>
@@ -32,30 +32,39 @@
     <% end %>
   </div>
 
-  <!-- Link to add new category -->
-  <%= link_to "Add New Category", new_category_path %>
+<!-- scroll method to select product categories 
+  < form.label :category_ids, "Select Categories" %>
+  < form.collection_select :category_ids, Category.all, :id, :name, { prompt: "Select categories", multiple: true } %> -->
 
-  <%= form.label :category_ids, "Select Categories" %>
-  <%= form.collection_select :category_ids, Category.all, :id, :name, { prompt: "Select categories", multiple: true } %>
-  <div>
-    <strong>Select Categories:</strong>
-    <% Category.all.each do |category| %>
-      <label>
-        <%= check_box_tag "product[category_ids][]", category.id, product.categories.include?(category) %>
-        <%= category.name %>
-      </label>
-      <br>
-    <% end %>
+
+  <div class="container">
+    <strong>Select Categories:  </strong> <br>
+    <div class="row">
+      <% Category.all.each do |category| %>
+      <div class="col-md-4">
+        <label class="form-check-label" >
+         <%= check_box_tag "product[category_ids][]", category.id, product.categories.include?(category)%>
+         <%= category.name %>
+        </label>
+      </div>
+       <br>
+      <% end %>
+    </div>
   </div>
+  <br>
+  <!-- Link to add new category -->
+    <div class="col-md-6">
+      <%= link_to "Add New Category", new_category_path, class: "btn btn-secondary"%>
+    </div><br><br>
 
-  <div class="form-group">
+  <div class=" field form-group">
     <%= form.text_area :summary, class: "form-control",placeholder:"Summary" %>
     <% product.errors.full_messages_for(:summary).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
 
-    <div class="form-group">
+    <div class=" field form-group">
 
     <%= form.text_area :description, class: "form-control",placeholder:"Description" %>
     <% product.errors.full_messages_for(:description).each do |message| %>
@@ -63,7 +72,7 @@
     <% end %>
   </div>
 
-    <div class="form-group">
+    <div class=" field form-group">
 
     <%= form.text_field :quantity, class: "form-control",placeholder:"Quantity" %>
     <% product.errors.full_messages_for(:quantity).each do |message| %>
@@ -71,8 +80,8 @@
     <% end %>
   </div>
 
-  <div class="form-group">
-    <%= form.submit "Submit", class: "btn btn-primary" %>
+  <div class="field form-group">
+    <%= form.submit "Submit", class: "btn btn-secondary" %>
   </div>
 <% end %>
 </div>

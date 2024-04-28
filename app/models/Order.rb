@@ -4,6 +4,10 @@ class Order < ApplicationRecord
   	belongs_to :user
   	has_many :order_items
 
+    def total_amount
+    order_item.sum { |item| (item.product.price || BigDecimal('0')) * (item.quantity || 0) }
+  end
+
   	enum status: [:pending, :shipped, :delivered]  # Define order statuses
   def update_status
     if (Time.now - created_at) < 1.days

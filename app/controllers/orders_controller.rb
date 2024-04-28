@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
   def show
     @order = current_user.orders.find(params[:id])
     # @order.update_status  # Call method to update order status
-     @ordered_item_price = @order.order_items.sum(:price)
+     @ordered_item_price = @order.order_items.sum { |item| item.price * item.quantity }
      @tax = ((@ordered_item_price) *18)/100
      @discount= ((@ordered_item_price)*10)/100
      @total_bill= @ordered_item_price + @tax - @discount

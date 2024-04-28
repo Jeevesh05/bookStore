@@ -84,7 +84,6 @@ class ProductsController < ApplicationController
     
       redirect_to product_path
   end
-    
 
   private
     def product_params

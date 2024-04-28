@@ -1,8 +1,25 @@
-<h1>Add New Category</h1>
+<div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Add New Category</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">my product</p>
+            </div>
+        </div>
+    </div>
 
+<div class="container border p-4 w-50 rounded ">
 <%= form_with(model: @category, local: true) do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
 
-  <%= form.submit "Create Category" %>
+<div class=" field form-group">
+  <%= form.text_field :name ,class: "form-control",placeholder:"Category Name"%>
+  <br>
+</div>
+
+<div class=" field form-group">
+  <%= form.submit "Create Category", class: "btn btn-secondary"  %>
+</div>
+
 <% end %>
+</div>
