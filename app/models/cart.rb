@@ -20,4 +20,5 @@ class Cart < ApplicationRecord
   def clear
     cart_items.destroy_all
   end
+
 end

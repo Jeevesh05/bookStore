@@ -1,10 +1,27 @@
-<h1>About</h1>
+<div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Your Profile</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">my product</p>
+            </div>
+        </div>
+</div>
+    
 
 
-<p>Welcome, <%= current_seller.name %></p>
-<p>Your seller id:  <%= current_seller.id %></p>
-<p>Your address: <%= current_seller.address %></p>
-<p>Your phone number: <%= current_seller.phone_number %></p>
+<div class="jumbotron" style="background-color: white;">
+  <h1 class="display-4"><%= current_seller.name %></h1>
+  <p class="lead"> Seller Id: <%= current_seller.id %> </p>
+  <hr class="my-4">
+  <h6>Contact Info<br></h6>
+  <p>Address: <%= current_seller.address %></p>
+  <p>Mobile No.: <%= current_seller.phone_number %></p>
+
+  <p class="lead">
+    <%= button_to "Edit details", edit_seller_path(current_seller.id), method: :get, class: "btn btn-secondary mt-4 ml-4" %>
+  </p>
+</div>
 
 
-<%= button_to "Edit details", edit_seller_path(current_seller.id), method: :get, class: "btn btn-primary mt-3 ml-3" %>

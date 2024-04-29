@@ -84,7 +84,10 @@ class ProductsController < ApplicationController
 
       redirect_to product_path
   end
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/master
 
   private
     def product_params
