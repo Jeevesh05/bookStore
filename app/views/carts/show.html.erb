@@ -122,7 +122,7 @@
                             </div>
                             <div class="d-flex justify-content-between">
                                 <h6 class="font-weight-medium">Shipping</h6>
-                                <h6 class="font-weight-medium"><%= number_to_currency(5) %></h6> <!-- Shipping charge -->
+                                <h6 class="font-weight-medium">Free</h6> <!-- Shipping charge -->
                             </div>
                         <% end %>
                     </div>
@@ -130,7 +130,7 @@
                         <% if @cart.cart_items.any? %>
                             <div class="d-flex justify-content-between mt-2">
                                 <h5 class="font-weight-bold">Total</h5>
-                                <h5 class="font-weight-bold"><%= number_to_currency(@cart.total_amount + 5) %></h5> <!-- Total amount including shipping -->
+                                <h5 class="font-weight-bold"><%= number_to_currency(@cart.total_amount) %></h5> <!-- Total amount including shipping -->
                             </div>
                             <%= link_to "Proceed To checkout", reviews_path, class: "btn btn-block btn-primary my-3 py-3" %>
                         <% else %>

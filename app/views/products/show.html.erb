@@ -1,7 +1,7 @@
     <!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">Lover's Lane</h1>
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Book Details</h1>
             <div class="d-inline-flex">
                 <p class="m-0"><a href="<%= root_path %>">Home</a></p>
                 <p class="m-0 px-2">-</p>
@@ -60,10 +60,7 @@
                         <% end %>
                     </div>
                 </div>
-            <%= form_tag add_to_cart_product_path(@products.id), method: :post, id: "add-to-cart-form" do %>
-                <%= number_field_tag 'quantity', 1, min: 1, max: @products.available_quantity, class: "form-control bg-secondary text-center", id: "quantity-field" %>
-                <%= button_tag "Add to Cart", type: "submit", class: "btn btn-primary mt-3", data: { disable_with: "Adding..." } %>
-            <% end %>                
+                      
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <%= form_tag add_to_cart_product_path(@products.id), method: :post, id: "add-to-cart-form" do %>
                         <%= number_field_tag 'quantity', 1, min: 1, max: @products.available_quantity, class: "form-control bg-secondary text-center", id: "quantity-field" %>
@@ -115,42 +112,26 @@
                     </div>
                     <div class="tab-pane fade" id="tab-pane-2">
                         <h4 class="mb-3">Additional Information</h4>
-                        <p>This product is assured by Us. add something like this</p>
+                        <p>This product is assured by Elibrary. We only allow trusted sellers on our website.</p>
                         <div class="row">
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item px-0">
-                                        Sit erat duo lorem duo ea consetetur, et eirmod takimata.
+                                        If you face any issues you can directly contatct seller through his email.
                                     </li>
                                     <li class="list-group-item px-0">
-                                        Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
+                                        current Product is sold by <%= @products.seller.name %>
                                     </li>
                                     <li class="list-group-item px-0">
-                                        Duo amet accusam eirmod nonumy stet et et stet eirmod.
+                                        email id of the seller <%= @products.seller.email %>
                                     </li>
                                     <li class="list-group-item px-0">
-                                        Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
-                                    </li>
-                                  </ul> 
-                            </div>
-                            <div class="col-md-6">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item px-0">
-                                        Sit erat duo lorem duo ea consetetur, et eirmod takimata.
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        Duo amet accusam eirmod nonumy stet et et stet eirmod.
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
+                                        Please do not disturb sellers unnecessarily.
                                     </li>
                                   </ul> 
                             </div>
                         </div>
-                    </div>
+                    </div>       
                     <div class="tab-pane fade" id="tab-pane-3">
                         <div class="row">
                             <div class="col-md-6">
@@ -166,7 +147,9 @@
                                             <i class="fas fa-star-half-alt"></i>
                                             <i class="far fa-star"></i>
                                         </div>
-                                        <p>This is a static review.So add the common review which would look nice for all the books. or simply  write how good the website is or its service</p>
+                                        <p>I have ordered books multiple times from their website and never faced any issue.
+                                             I was amazed to you that they provided details of the seller as well which ultimately increases my trust in them.
+                                             I recommand you to use their services without any hesitation. You will thank me later.</p>
                                     </div>
                                 </div>
                             </div>
